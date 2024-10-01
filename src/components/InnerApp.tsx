@@ -63,7 +63,7 @@ const InnerApp = ({ selectedApp, selected }: { selectedApp: string | undefined, 
   } else if (selectedApp === "unity") {
     return <iframe src="https://nabilmansour.com/FractalGlide/" width="100%" height="100%" style={{ pointerEvents: selected ? "all" : 'none' }} className='main' />
   } else if (selectedApp === "cube") {
-    return <iframe width="1310" height="875"
+    return <iframe width="1410" height="950"
       src="https://www.shadertoy.com/embed/cs3Gz4?gui=false&t=10&paused=true&muted=false"
       style={{ pointerEvents: selected ? "all" : 'none', marginTop: "5px" }}
       className='main'
