@@ -30,7 +30,7 @@ const SandPackRest = ({ selectedApp, selected }: { selectedApp: string, selected
     {enableCode ?
       <SandpackCodeEditor showLineNumbers closableTabs style={{ height: "950px", flex: 3 }} className='fadeIn' /> :
       <button onClick={() => setEnableCode(true)} disabled={!selected || !timePassed}
-        style={{ flex: 3, backgroundColor: selectedApp==="nextjs"?"#151515":"#011627", border: "none", cursor: "pointer" }}>
+        style={{ flex: 3, backgroundColor: selectedApp === "nextjs" ? "#151515" : "#011627", border: "none", cursor: "pointer" }}>
         Show Code
       </button>}
 
@@ -39,25 +39,24 @@ const SandPackRest = ({ selectedApp, selected }: { selectedApp: string, selected
 }
 
 const InnerApp = ({ selectedApp, selected }: { selectedApp: string | undefined, selected: boolean }) => {
+  const files = useMemo(() => ({
+    "/App.js": { code: selectedApp === "nextjs" ? nextjs : react },
+    "/utils/projects.js": { code: selectedApp === "nextjs" ? projectsNext : projectsReact },
+    "/utils/styles.js": { code: selectedApp === "nextjs" ? stylesNext : stylesReact },
+    "/styles.css": { code: stylesCss },
+  }), [selectedApp]);
+
+  const customSetup = useMemo(() => ({
+    dependencies: {
+      "react-icons": "^5.2.1",
+    }
+  }), []);
+
   if (selectedApp === "nextjs" || selectedApp === "react") {
     return <SandpackProvider template="react" theme={selectedApp === "nextjs" ? "dark" : nightOwl} key={selectedApp}
       style={{ pointerEvents: selected ? "all" : 'none', height: "950px", width: "1410px" }} className='main'
-      options={{
-        // autorun: false,
-        // initMode: 'lazy',
-      }}
-      // this is nuts
-      files={useMemo(() => ({
-        "/App.js": { code: selectedApp === "nextjs" ? nextjs : react },
-        "/utils/projects.js": { code: selectedApp === "nextjs" ? projectsNext : projectsReact },
-        "/utils/styles.js": { code: selectedApp === "nextjs" ? stylesNext : stylesReact },
-        "/styles.css": { code: stylesCss },
-      }), [selectedApp])}
-      customSetup={useMemo(() => ({
-        dependencies: {
-          "react-icons": "^5.2.1",
-        }
-      }), [])}>
+      files={files}
+      customSetup={customSetup}>
       <SandPackRest selectedApp={selectedApp} selected={selected} />
     </SandpackProvider>
   } else if (selectedApp === "unity") {
