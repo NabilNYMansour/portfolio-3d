@@ -5,16 +5,15 @@ import * as THREE from "three";
 import { LaptopModel } from "./components/LaptopModel";
 import Icon3D from "./components/Icon3D";
 import { nextIcon } from "./utils/Icons";
-import { mdiReact, mdiUnity, mdiYoutube, mdiCube } from '@mdi/js';
+import { mdiReact, mdiUnity, mdiYoutube } from '@mdi/js';
 import IntroText3D from "./components/IntroText3D";
 import { isMobile } from 'react-device-detect';
 
-const icons = [
+const ICONS = [
   { name: "nextjs", path: nextIcon, color: "black" },
   { name: "react", path: mdiReact, color: "#5ED3F3" },
   { name: "unity", path: mdiUnity, color: "green" },
   { name: "youtube", path: mdiYoutube, color: "#FF4950" },
-  { name: "cube", path: mdiCube, color: "#E28B1A" }
 ]
 
 const Main = () => {
@@ -59,10 +58,6 @@ Click on an icon or
       case "youtube":
         setBackground("#FF4950");
         setDescription("I make videos sometimes");
-        break;
-      case "cube":
-        setBackground("#F7A517");
-        setDescription("They call me shaderman");
         break;
       default:
         setBackground("#26252A");
@@ -200,11 +195,11 @@ Click on an icon or
 
       <group position={[-2, -0.25, 3]} rotation={[0, Math.PI / 2, 0]}>
         <IntroText3D heyText={heyText} nabil={nabil} setSelectedApp={setSelectedApp} setNabilHover={setNabilHover} />
-        <group position={[-0.5, 0, 0]}
+        <group position={[0.25, 0, 0]}
           onPointerEnter={() => setIconsHover(true)}
           onPointerLeave={() => setIconsHover(false)}
         >
-          {icons.map((icon, i) => (
+          {ICONS.map((icon, i) => (
             <Icon3D key={i} path={icon.path} color={selectedApp === icon.name ? "white" : icon.color}
               position={[i * 0.7, i * 0.15, 0]} scale={1} selected={selectedApp === icon.name}
               onClick={() => setSelectedApp(icon.name)}
