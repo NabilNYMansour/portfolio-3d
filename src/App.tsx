@@ -5,14 +5,14 @@ import * as THREE from "three";
 import { LaptopModel } from "./components/LaptopModel";
 import Icon3D from "./components/Icon3D";
 import { nextIcon } from "./utils/Icons";
-import { mdiReact, mdiUnity, mdiYoutube } from '@mdi/js';
+import { mdiReact, mdiYoutube } from '@mdi/js';
 import IntroText3D from "./components/IntroText3D";
 import { isMobile } from 'react-device-detect';
 
 const ICONS = [
   { name: "nextjs", path: nextIcon, color: "black" },
   { name: "react", path: mdiReact, color: "#5ED3F3" },
-  { name: "unity", path: mdiUnity, color: "green" },
+  // { name: "unity", path: mdiUnity, color: "green" },
   { name: "youtube", path: mdiYoutube, color: "#FF4950" },
 ]
 
@@ -170,8 +170,12 @@ Click on an icon or
           onClick={() => setOnLaptop(true)}
           onPointerEnter={() => LaptopHover(true)}
           onPointerLeave={() => LaptopHover(false)}>
-          <LaptopModel selected={onLaptop} setSelected={setOnLaptop} setHoverHTML={setLaptopHoverHTML}
-            selectedApp={selectedApp} />
+          <LaptopModel
+            selected={onLaptop}
+            setSelected={setOnLaptop}
+            setHoverHTML={setLaptopHoverHTML}
+            selectedApp={selectedApp}
+          />
           <group
             rotation={[-Math.PI / 2, 0, 0]}
             position={[-0.165, 0, 0.155]}>
